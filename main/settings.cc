@@ -15,7 +15,7 @@ Server_Urls Read_server_url()
         // The namespace doesn't exist, just return default values
         ESP_LOGW(TAG, "NVS namespace %s doesn't exist", NVS_NAMESPACE);
         nvs_close(nvs_handle);
-        return {"https://api.tenclass.net/xiaozhi/ota/", "wss://api.tenclass.net/xiaozhi/v1/"};
+        return {"http://coze.nbee.net/xiaozhi/ota/", "ws://coze.nbee.net/xiaozhi/v1/"};
     }
 
     Server_Urls serverUrls = {};
@@ -24,14 +24,14 @@ Server_Urls Read_server_url()
     if (nvs_get_str(nvs_handle, "ota_url", serverUrls.ota_url, &length) != ESP_OK) {
         ESP_LOGE(TAG, "GET ota_url FAIL");
         // If failed, use default OTA URL
-        strncpy(serverUrls.ota_url, "https://api.tenclass.net/xiaozhi/ota/", sizeof(serverUrls.ota_url));
+        strncpy(serverUrls.ota_url, "http://coze.nbee.net/xiaozhi/ota/", sizeof(serverUrls.ota_url));
     }
 
     length = sizeof(serverUrls.websocket_url);
     if (nvs_get_str(nvs_handle, "websocket_url", serverUrls.websocket_url, &length) != ESP_OK) {
         ESP_LOGE(TAG, "GET websocket_url FAIL");
         // If failed, use default websocket URL
-        strncpy(serverUrls.websocket_url, "wss://api.tenclass.net/xiaozhi/v1/", sizeof(serverUrls.websocket_url));
+        strncpy(serverUrls.websocket_url, "ws://coze.nbee.net/xiaozhi/v1/", sizeof(serverUrls.websocket_url));
     }
 
     nvs_close(nvs_handle);
